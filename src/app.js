@@ -2,7 +2,12 @@ import React from 'react'
 import { render } from 'react-dom'
 import Container from './components/Container'
 import { parties } from './fixtures'
+import { Provider } from 'react-redux'
+import store from './store'
 
 
 
-render(<Container parties={parties}/>, document.getElementById('container'))
+render(<Provider store={store}>
+  <Container />
+  </Provider>
+  , document.getElementById('container'))

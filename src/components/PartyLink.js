@@ -1,6 +1,7 @@
 import React from 'react'
-import {Component, PropTypes} from 'react'
-
+import { Component, PropTypes } from 'react'
+import { connect } from 'react-redux'
+import { joinToParty } from '../AC/joinToParty'
 class PartyLink extends Component {
 
   static PropTypes = {
@@ -21,11 +22,18 @@ class PartyLink extends Component {
     return (
       <div>
         {body}
-        <button>Join Party</button>
+        <button onClick={this.handleJoin}>Join Party</button>
       </div>
     )
   }
-  
+
+  handleJoin = (ev) => {
+    const {joinToParty, user, party} = this.props
+    if (user.nick) joinToParty(user, party.id)
+  }
+
 }
 
-export default PartyLink
+export default connect(state => ({
+  user: state.user
+}), { joinToParty })(PartyLink)
