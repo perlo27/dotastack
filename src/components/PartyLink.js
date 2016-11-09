@@ -2,6 +2,8 @@ import React from 'react'
 import { Component, PropTypes } from 'react'
 import { connect } from 'react-redux'
 import { joinToParty } from '../AC/joinToParty'
+import { Link } from 'react-router'
+
 class PartyLink extends Component {
 
   static PropTypes = {
@@ -22,7 +24,7 @@ class PartyLink extends Component {
     return (
       <div>
         {body}
-        <button onClick={this.handleJoin}>Join Party</button>
+        <Link to={`/parties/${party.id}`} onClick={this.handleJoin}>Join Party</Link>
       </div>
     )
   }

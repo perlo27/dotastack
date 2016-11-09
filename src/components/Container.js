@@ -1,6 +1,7 @@
 import React from 'react'
 import {Component, PropTypes} from 'react'
 import PartyList from './PartyList'
+import PartyPage from './PartyPage'
 import PartyCreate from './PartyCreate'
 import { connect } from 'react-redux'
 import SignIn from './SignIn'
@@ -24,6 +25,7 @@ class Container extends Component {
           <ul>
             <li><Link to="/partylist">Party list</Link></li>
             <li><Link to="/createparty">Create party</Link></li>
+            <li><Link to="/parties/1234412">Party 1 page</Link></li>
           </ul>
           <h3>some filters</h3>
 
