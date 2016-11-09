@@ -5,14 +5,45 @@ import { connect } from 'react-redux'
 
 class PartyCreate extends Component {
 
-  handleCreate = () => {
-    const { createPatry } = this.props
-    createPatry()
+  state = {
+    partyname: "",
+    players: [],
+    decription: "",
+    id: null,
+    averagemmr: null
   }
 
+  componentDidMount() {
+    const {user} = this.props
+    console.log('update ', user)
+    this.setState({
+      players: [user]
+    })
+  }
+
+  handleSubmit = ev => {
+    ev.preventDefault()
+    this.props.createPatry(this.state)
+  }
+  handleChange = field => ev => this.setState({
+      [field]: ev.target.value
+  })
+
   render() {
-    return (<button onClick = {this.handleCreate}>new party</button>)
+
+    return (
+      <form onSubmit = {this.handleSubmit}>
+        PartyName: <input type="text" value={this.state.partyname} onChange = {this.handleChange('partyname')}/>
+        <br/>
+        Description: <input type="text" value={this.state.decription} onChange = {this.handleChange('decription')}/>
+        <br/>
+        <input type = "submit"/>
+      </form>
+  )
+
   }
 }
 
-export default connect(null, { createPatry })(PartyCreate)
+export default connect(state => ({
+  user: state.user
+}), { createPatry })(PartyCreate)
