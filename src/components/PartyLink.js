@@ -15,8 +15,9 @@ class PartyLink extends Component {
     const {party} = this.props
     const body = (
       <div>
-        <h4> {party.partyname}  <span>MMR: {party.averagemmr}</span></h4>
-        <ul> {party.players.map(player=>(
+        <h4> {party.get('partyname')}  <span>MMR: {party.get('averagemmr')}</span></h4>
+        <h5> {party.get('description')} </h5>
+        <ul> {party.get('players').toArray().map(player=>(
             <li key={player.id}><span>{player.nick}, mmr:{player.mmr}</span> {player.role}</li>))}
         </ul>
       </div>)
@@ -24,14 +25,14 @@ class PartyLink extends Component {
     return (
       <div>
         {body}
-        <Link to={`/parties/${party.id}`} onClick={this.handleJoin}>Join Party</Link>
+        <Link to={`/parties/${party.get('id')}`} onClick={this.handleJoin}>Join Party</Link>
       </div>
     )
   }
 
   handleJoin = (ev) => {
     const {joinToParty, user, party} = this.props
-    if (user.nick) joinToParty(user, party.id)
+    if (user.nick) joinToParty(user, party.get('id'))
   }
 
 }

@@ -1,10 +1,11 @@
 import { CREATE_PARTY } from '../constants'
 
-export function createPatry(party) {
+export function createPatry(partyprops, user) {
   return {
     type: CREATE_PARTY,
     payload: {
-      party
-    }
+      partyprops, user
+    },
+    generateId: true
   }
 }

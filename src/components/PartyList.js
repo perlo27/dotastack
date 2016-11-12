@@ -7,7 +7,7 @@ class PartyList extends Component {
   render() {
 
     const {parties} = this.props
-    
+    console.log('PARTIES IN PARTYLIST---',parties);
     const body = parties.map(party => <PartyLink party={party} key={party.id}/>)
 
     return (
@@ -20,7 +20,7 @@ class PartyList extends Component {
 
 export default connect(state => (
   {
-    parties: state.parties
+    parties: state.parties.valueSeq().toArray()
   }
 )
 

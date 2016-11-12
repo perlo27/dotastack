@@ -2,28 +2,20 @@ import React from 'react'
 import {Component, PropTypes} from 'react'
 import { createPatry } from '../AC/createPatry'
 import { connect } from 'react-redux'
+import history from '../history'
 
 class PartyCreate extends Component {
 
   state = {
     partyname: "",
-    players: [],
-    decription: "",
-    id: null,
-    averagemmr: null
+    description: ""
   }
 
-  componentDidMount() {
-    const {user} = this.props
-    console.log('update ', user)
-    this.setState({
-      players: [user]
-    })
-  }
 
   handleSubmit = ev => {
+    const {user} = this.props
     ev.preventDefault()
-    this.props.createPatry(this.state)
+    this.props.createPatry(this.state, user)
   }
   handleChange = field => ev => this.setState({
       [field]: ev.target.value
@@ -35,7 +27,7 @@ class PartyCreate extends Component {
       <form onSubmit = {this.handleSubmit}>
         PartyName: <input type="text" value={this.state.partyname} onChange = {this.handleChange('partyname')}/>
         <br/>
-        Description: <input type="text" value={this.state.decription} onChange = {this.handleChange('decription')}/>
+        Description: <input type="text" value={this.state.description} onChange = {this.handleChange('description')}/>
         <br/>
         <input type = "submit"/>
       </form>

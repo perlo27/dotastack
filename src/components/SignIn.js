@@ -7,8 +7,9 @@ class SignIn extends Component {
 
   render() {
     const { user } = this.props
-    
-    return user.nick ? <div><h4>{ user.nick } <span>MMR: { user.mmr }</span></h4></div> : <button onClick={ this.handleSignIn }>Sign In</button>
+
+    return user.nick ? <div><h4>{ user.nick } <span>MMR: { user.mmr }</span></h4>
+    <button>Sign Out</button></div> : <button onClick={ this.handleSignIn }>Sign In</button>
   }
 
   handleSignIn = (ev) => {
