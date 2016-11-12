@@ -1,5 +1,5 @@
 import { parties as defParties} from '../fixtures'
-import { CREATE_PARTY, JOIN_TO_PARTY, LEAVE_PARTY } from '../constants'
+import { CREATE_PARTY, JOIN_TO_PARTY, LEAVE_PARTY, DELETE_PARTY } from '../constants'
 import { Record, Map, List } from 'immutable'
 import { arrayToMap } from '../store/helpers'
 
@@ -41,13 +41,15 @@ export default (parties = defStateP, action) => {
           players: new Map({}).set(payload.user.id, new PlayerModel(payload.user))
         })
       )
-    break
 
     case JOIN_TO_PARTY:
       return parties.setIn([payload.partyId, 'players', payload.user.id], new PlayerModel(payload.user) )
 
     case LEAVE_PARTY:
       return parties.deleteIn([payload.partyId, 'players', payload.user.id])
+
+    case DELETE_PARTY:
+      return parties.delete(payload.partyId)
   }
 
   return parties
