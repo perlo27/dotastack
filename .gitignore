@@ -1,2 +1,8 @@
 node_modules
 build
+.idea/.name
+.idea/compiler.xml
+.idea/copyright/
+.idea/encodings.xml
+.idea/misc.xml
+.idea/workspace.xml
