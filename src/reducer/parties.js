@@ -1,7 +1,7 @@
 import { parties as defParties} from '../fixtures'
 import { CREATE_PARTY, JOIN_TO_PARTY, LEAVE_PARTY, DELETE_PARTY } from '../constants'
 import { Record, Map, List } from 'immutable'
-import { arrayToMap } from '../store/helpers'
+import { arrayToMap, updateMMR } from '../store/helpers'
 
 const PartyModel = Record({
     id: null,
@@ -45,8 +45,9 @@ export default (parties = defStateP, action) => {
       )
 
     case JOIN_TO_PARTY:
+
       return parties.setIn([payload.partyId, 'players', payload.user.id], new PlayerModel(payload.user) )
-                    .setIn([payload.partyId, 'averagemmr'], parties.getIn([payload.partyId, 'averagemmr']) + payload.user.mmr)
+                    .setIn( [payload.partyId, 'averagemmr'], updateMMR(parties.getIn([payload.partyId, 'players']), payload.user.mmr))
 
     case LEAVE_PARTY:
       return parties.deleteIn([payload.partyId, 'players', payload.user.id])

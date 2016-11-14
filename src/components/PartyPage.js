@@ -19,7 +19,7 @@ class PartyPage extends Component {
     return (
       <div>
         <Link to ="partylist" onClick={this.handleLeave}>Leave party</Link>
-        <h2>{party.partyname}</h2>
+        <h2>{party.get('partyname')}, mmr: {party.get('averagemmr')} </h2>
         <ul>{players}</ul>
 
       </div>
