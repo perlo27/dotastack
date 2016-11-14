@@ -1,5 +1,6 @@
 export const CREATE_PARTY = 'CREATE_PARTY'
 export const SIGN_IN = 'SIGN_IN'
+export const SIGN_OUT = 'SIGN_OUT'
 export const JOIN_TO_PARTY = 'JOIN_TO_PARTY'
 export const LEAVE_PARTY = 'LEAVE_PARTY'
 export const DELETE_PARTY = 'DELETE_PARTY'

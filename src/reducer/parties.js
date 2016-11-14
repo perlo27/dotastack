@@ -9,6 +9,7 @@ const PartyModel = Record({
     partyname: "",
     description: "",
     leader: null,
+    averagemmr: null,
     players: new Map({})
 })
 
@@ -38,12 +39,14 @@ export default (parties = defStateP, action) => {
           partyname: payload.partyprops.partyname,
           description: payload.partyprops.description,
           leader: payload.user.id,
+          averagemmr: payload.user.mmr,
           players: new Map({}).set(payload.user.id, new PlayerModel(payload.user))
         })
       )
 
     case JOIN_TO_PARTY:
       return parties.setIn([payload.partyId, 'players', payload.user.id], new PlayerModel(payload.user) )
+                    .setIn([payload.partyId, 'averagemmr'], parties.getIn([payload.partyId, 'averagemmr']) + payload.user.mmr)
 
     case LEAVE_PARTY:
       return parties.deleteIn([payload.partyId, 'players', payload.user.id])

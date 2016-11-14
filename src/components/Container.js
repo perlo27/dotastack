@@ -4,7 +4,7 @@ import PartyList from './PartyList'
 import PartyPage from './PartyPage'
 import PartyCreate from './PartyCreate'
 import { connect } from 'react-redux'
-import SignIn from './SignIn'
+import Authtorization from './Authtorization'
 import { Provider } from 'react-redux'
 import store from '../store'
 import { Link } from 'react-router'
@@ -21,7 +21,7 @@ class Container extends Component {
     return (
       <Provider store={store}>
         <div>
-          <SignIn/>
+          <Authtorization/>
           <ul>
             <li><Link to="/partylist">Party list</Link></li>
             <li><Link to="/createparty">Create party</Link></li>

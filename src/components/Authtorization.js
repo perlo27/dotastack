@@ -1,15 +1,20 @@
 import React from 'react'
 import { Component, PropTypes } from 'react'
-import { signIn } from '../AC/signIn'
+import { signIn, signOut } from '../AC/auth'
 import { connect } from 'react-redux'
 
-class SignIn extends Component {
+class Authtorization extends Component {
 
   render() {
     const { user } = this.props
 
     return user.nick ? <div><h4>{ user.nick } <span>MMR: { user.mmr }</span></h4>
-    <button>Sign Out</button></div> : <button onClick={ this.handleSignIn }>Sign In</button>
+    <button onClick={ this.handleSignOut }>Sign Out</button></div> : <button onClick={ this.handleSignIn }>Sign In</button>
+  }
+
+  handleSignOut = ev => {
+    const {signOut} = this.props
+    signOut()
   }
 
   handleSignIn = (ev) => {
@@ -23,6 +28,7 @@ class SignIn extends Component {
   }
 }
 
+
 export default connect(state => ({
   user: state.user
-}), { signIn })(SignIn)
+}), { signIn, signOut })(Authtorization)

@@ -11,12 +11,12 @@ class PartyCreate extends Component {
     description: ""
   }
 
-
   handleSubmit = ev => {
     const {user} = this.props
     ev.preventDefault()
     this.props.createPatry(this.state, user)
   }
+
   handleChange = field => ev => this.setState({
       [field]: ev.target.value
   })

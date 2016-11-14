@@ -7,7 +7,6 @@ class PartyLinkHandler extends Component {
     };
 
     render() {
-        console.log('render partylinkhandler--- id= ',this.props.params.id)
         return (
             <div>
                 <PartyPage id={this.props.params.id}/>

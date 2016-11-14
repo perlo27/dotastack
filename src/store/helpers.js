@@ -1,8 +1,8 @@
 import { Map } from 'immutable'
+import store from './index'
 
-export function checkAuth(user) {
-  console.log(user)
-  return user ? true : false
+export function checkAuth() {
+  return store.getState().user.nick ? true : false 
 }
 
 export function arrayToMap(arr, mapper = (f) => f) {
