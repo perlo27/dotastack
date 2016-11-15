@@ -1,4 +1,15 @@
+<<<<<<< HEAD
 build
 node_modules
 .idea
 npm-debug.log
+=======
+node_modules
+build
+.idea/.name
+.idea/compiler.xml
+.idea/copyright/
+.idea/encodings.xml
+.idea/misc.xml
+.idea/workspace.xml
+>>>>>>> 176c1a0136ca346ac09340e1052eb376bf1c0c09

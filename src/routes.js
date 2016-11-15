@@ -10,12 +10,17 @@ import PartyLinkHandler from './routehandlers/PartyLinkHandler'
 import { checkAuth } from './store/helpers'
 import MessageHandler from './components/MessageHandler'
 
-export default <Router history={history}>
-  <Route path="/" component={Container}>
+const onEnter = (nextState, replace) => !checkAuth() && replace('/messages?message=Sign in through steam please')
 
-    <Route path="partylist" component = {PartyList}></Route>
-    <Route path="createparty" component = {PartyCreate} onEnter = {(nextState, replace) => !checkAuth() && replace('/messages?message=Sign in through steam please')}></Route>
-    <Route path="parties/:id" component = {PartyLinkHandler} onEnter = {(nextState, replace) => !checkAuth() && replace('/messages?message=Sign in through steam please')}/>
-    <Route path="messages" component = {MessageHandler}/>
-  </Route>
-</Router>
+const routes = (
+	<Router history={history}>
+		<Route path="/" component={Container}>
+			<Route path="partylist" component={PartyList}/>
+			<Route path="createparty" component={PartyCreate} onEnter={onEnter}/>
+			<Route path="parties/:id" component={PartyLinkHandler} onEnter={onEnter}/>
+			<Route path="messages" component={MessageHandler}/>
+		</Route>
+	</Router>
+);
+
+export default routes
