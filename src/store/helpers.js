@@ -13,7 +13,7 @@ export function updateMMR(playersMap, pmmr) {
   const mmrarr = playersMap.map(v => v.get('mmr')).toArray()
   const playersCount = mmrarr.length + 1
   const summMMR = mmrarr.reduce( (acc, v )=> acc + v, 0 )
-  const total = (summMMR + pmmr) / playersCount
+  const total = Math.floor((summMMR + pmmr) / playersCount)
 
   return total
 }

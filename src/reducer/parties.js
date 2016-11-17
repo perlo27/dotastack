@@ -10,7 +10,8 @@ const PartyModel = Record({
     description: "",
     leader: null,
     averagemmr: null,
-    players: new Map({})
+    players: new Map({}),
+    waitlist: new Map({})
 })
 
 const PlayerModel = Record({
@@ -24,10 +25,11 @@ const PlayerModel = Record({
 
 const defState = arrayToMap(defParties, party => new PartyModel(party))
 const defStateP = defState.map((v,k) => v.update('players', players => arrayToMap(players, player => new PlayerModel(player))))
-window.defState = defStateP
+const dswupd = defStateP.map( v => v.update('waitlist', waitlist => arrayToMap(waitlist, wlp => new PlayerModel(wlp))))
+window.defState = dswupd
 
 
-export default (parties = defStateP, action) => {
+export default (parties = dswupd, action) => {
   const {type, payload, generatedId} = action
 
   switch (type) {
@@ -40,7 +42,8 @@ export default (parties = defStateP, action) => {
           description: payload.partyprops.description,
           leader: payload.user.id,
           averagemmr: payload.user.mmr,
-          players: new Map({}).set(payload.user.id, new PlayerModel(payload.user))
+          players: new Map({}).set(payload.user.id, new PlayerModel(payload.user)),
+          waitlist: new Map({})
         })
       )
 

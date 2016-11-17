@@ -2,6 +2,7 @@ import React from 'react'
 import { Component, PropTypes } from 'react'
 import { connect } from 'react-redux'
 import { Link } from 'react-router'
+import WaitList from './WaitList'
 import { leaveParty, deleteParty } from '../AC/party'
 
 class PartyPage extends Component {
@@ -13,7 +14,7 @@ class PartyPage extends Component {
 
   }
   render() {
-    const {party} = this.props
+    const {party, user} = this.props
     const players = party.get('players').toArray().map( player => <li key={player.id}>{player.nick}, mmr:{player.mmr}</li>)
 
     return (
@@ -21,7 +22,8 @@ class PartyPage extends Component {
         <Link to ="partylist" onClick={this.handleLeave}>Leave party</Link>
         <h2>{party.get('partyname')}, mmr: {party.get('averagemmr')} </h2>
         <ul>{players}</ul>
-
+        <h2>WAITLIST</h2>
+        <WaitList party={party} user={user}/>
       </div>
     )
   }
