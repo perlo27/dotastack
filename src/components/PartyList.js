@@ -5,8 +5,9 @@ import { connect } from 'react-redux'
 
 
 class PartyList extends Component {
-  render() {
 
+  render() {
+    
     const {parties} = this.props
     const body = parties.map(party => <PartyLink party={party} key={party.id}/>)
 

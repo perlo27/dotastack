@@ -2,8 +2,15 @@ import React from 'react'
 import { Component, PropTypes } from 'react'
 import { signIn, signOut } from '../AC/auth'
 import { connect } from 'react-redux'
+import { leaveParty, deleteParty } from '../AC/party'
 
 class Authtorization extends Component {
+
+  componentWillMount() {
+    const {signIn} = this.props
+    const user = localStorage.getItem('user')
+    if (user) signIn(JSON.parse(user))
+  }
 
   render() {
     const { user } = this.props
@@ -13,7 +20,10 @@ class Authtorization extends Component {
   }
 
   handleSignOut = ev => {
-    const {signOut} = this.props
+    const {user, signOut, parties, leaveParty} = this.props
+    const pertyWithUser = parties.findKey(v => v.get('players').has(user.id))
+
+    if ( pertyWithUser ) leaveParty(user, pertyWithUser)
     signOut()
   }
 
@@ -30,5 +40,6 @@ class Authtorization extends Component {
 
 
 export default connect(state => ({
-  user: state.user
-}), { signIn, signOut })(Authtorization)
+  user: state.user,
+  parties: state.parties
+}), { signIn, signOut, leaveParty })(Authtorization)

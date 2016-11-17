@@ -15,9 +15,10 @@ const authReq = (nextState, replace) => !checkAuth() && replace('/messages?messa
 const routes = (
 	<Router history={history}>
 		<Route path="/" component={Container}>
+			<IndexRedirect to = "/partylist" />
 			<Route path="partylist" component={PartyList}/>
-			<Route path="createparty" component={PartyCreate} authReq={authReq}/>
-			<Route path="parties/:id" component={PartyLinkHandler} authReq={authReq}/>
+			<Route path="createparty" component={PartyCreate} onEnter={authReq}/>
+			<Route path="parties/:id" component={PartyLinkHandler} onEnter={authReq}/>
 			<Route path="messages" component={MessageHandler}/>
 		</Route>
 	</Router>
