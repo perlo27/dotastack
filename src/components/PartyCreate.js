@@ -1,6 +1,6 @@
 import React from 'react'
 import {Component, PropTypes} from 'react'
-import { createPatry } from '../AC/createPatry'
+import { createPatry } from '../AC/party'
 import { connect } from 'react-redux'
 import history from '../history'
 

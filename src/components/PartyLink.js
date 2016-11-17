@@ -1,7 +1,7 @@
 import React from 'react'
 import { Component, PropTypes } from 'react'
 import { connect } from 'react-redux'
-import { joinToParty } from '../AC/joinToParty'
+import { joinToParty } from '../AC/party'
 import { Link } from 'react-router'
 
 class PartyLink extends Component {

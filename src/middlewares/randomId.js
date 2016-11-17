@@ -10,5 +10,5 @@ export default store => next => action => {
         generatedId
     })
 
-    history.push( `parties/${generatedId}`)
+    
 }

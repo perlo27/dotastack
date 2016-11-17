@@ -10,14 +10,14 @@ import PartyLinkHandler from './routehandlers/PartyLinkHandler'
 import { checkAuth } from './store/helpers'
 import MessageHandler from './components/MessageHandler'
 
-const onEnter = (nextState, replace) => !checkAuth() && replace('/messages?message=Sign in through steam please')
+const authReq = (nextState, replace) => !checkAuth() && replace('/messages?message=Sign in through steam please')
 
 const routes = (
 	<Router history={history}>
 		<Route path="/" component={Container}>
 			<Route path="partylist" component={PartyList}/>
-			<Route path="createparty" component={PartyCreate} onEnter={onEnter}/>
-			<Route path="parties/:id" component={PartyLinkHandler} onEnter={onEnter}/>
+			<Route path="createparty" component={PartyCreate} authReq={authReq}/>
+			<Route path="parties/:id" component={PartyLinkHandler} authReq={authReq}/>
 			<Route path="messages" component={MessageHandler}/>
 		</Route>
 	</Router>

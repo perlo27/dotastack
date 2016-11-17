@@ -2,8 +2,7 @@ import React from 'react'
 import { Component, PropTypes } from 'react'
 import { connect } from 'react-redux'
 import { Link } from 'react-router'
-import { leaveParty } from '../AC/leaveParty'
-import { deleteParty } from '../AC/deleteParty'
+import { leaveParty, deleteParty } from '../AC/party'
 
 class PartyPage extends Component {
   handleLeave = ev => {
@@ -11,6 +10,7 @@ class PartyPage extends Component {
     leaveParty(user, party.get('id'))
 
     if ( user.id == party.get('leader') ) deleteParty(party.get('id'))
+
   }
   render() {
     const {party} = this.props
