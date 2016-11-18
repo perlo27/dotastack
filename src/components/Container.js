@@ -8,6 +8,7 @@ import Authtorization from './Authtorization'
 import { Provider } from 'react-redux'
 import store from '../store'
 import { Link } from 'react-router'
+import Filters from './Filters'
 
 class Container extends Component {
 
@@ -28,6 +29,7 @@ class Container extends Component {
             <li><Link to="/parties/1234412">Party 1 page</Link></li>
           </ul>
           <h3>some filters</h3>
+          <Filters/>
 
           {this.props.children}
         </div>
