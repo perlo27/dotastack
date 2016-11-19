@@ -10,5 +10,5 @@ const enhancer = composeEnhancers(applyMiddleware(thunk, randomId, userToLocalSt
 
 const store = createStore(reducer, {}, enhancer)
 
-
+window.store = store
 export default store

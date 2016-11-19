@@ -11,7 +11,8 @@ const PartyModel = Record({
     leader: null,
     averagemmr: null,
     players: new Map({}),
-    waitlist: new Map({})
+    waitlist: new Map({}),
+    neededroles: []
 })
 
 const PlayerModel = Record({

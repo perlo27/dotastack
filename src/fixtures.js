@@ -27,6 +27,7 @@ export const parties  = [
           id: 1234412,
           averagemmr: 2200,
           leader: "12l2n3a124e324",
+          neededroles: ["supp"],
           waitlist: [
             {nick: "lopop",
              mmr: 1332,
@@ -68,6 +69,7 @@ export const parties  = [
           id: 23454234,
           averagemmr: 3200,
           leader: "12o45uvno5itvn124",
+          neededroles: ["off", "carry"],
           waitlist: [
             {nick: "lohhyypop",
              mmr: 2332,
@@ -85,20 +87,42 @@ export const parties  = [
           partyname: "partyuuuuf",
           players: [
             {nick: "ffdss",
-             mmr: 12313,
+             mmr: 9222,
              role: "mid",
              id: "12osdftvn124"
             },
             {nick: "pppta",
-             mmr: 12232,
+             mmr: 9333,
              role: "supp",
              id: "12lvvv5j6n7n7"
             }
           ],
           description: "gogo ya sozdal",
           id: 2341234,
-          averagemmr: 12200,
+          averagemmr: 9250,
           leader: "12osdftvn124",
+          neededroles: ["off", "carry", "supp"],
+          waitlist: []
+        },
+        {
+          partyname: "middduuuf",
+          players: [
+            {nick: "peeeee",
+             mmr: 4522,
+             role: "off",
+             id: "12osdft98ujonl"
+            },
+            {nick: "ppsdfpta",
+             mmr: 3833,
+             role: "supp",
+             id: "12lvvv59iw9erkrrrr"
+            }
+          ],
+          description: "gogo ya sozdal222",
+          id: 23412222234,
+          averagemmr: 4100,
+          leader: "12osdft98ujonl",
+          neededroles: ["mid"],
           waitlist: []
         }
 ]

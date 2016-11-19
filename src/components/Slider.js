@@ -1,7 +1,6 @@
 import React from 'react'
-import {Component, PropTypes} from 'react'
+import { Component, PropTypes } from 'react'
 import Slider from 'rc-slider'
-//import { changeMmrFilter } from '../AC/filters'
 require('rc-slider/assets/index.css')
 
 const handleStyle = {
@@ -28,25 +27,19 @@ class CustomHandle extends Component {
 
 class SliderComponent extends Component {
 
-  onSliderChange = (value) => {
-    const { changeMmrFilter } = this.props
-    changeMmrFilter(value)
-  }
-
   render() {
     const { userMMR } = this.props
-    const minMark = userMMR ?  userMMR <= 2500 ? 0 : userMMR - 2500 : 1000
-    const maxMark = userMMR ? userMMR + 2500 : 5000
+
     const marks = {
-      [minMark]: minMark,
-      [maxMark]: maxMark
+      0: 0,
+      10000: 10000
     }
     console.log(marks)
     return (
       <div>
-        <label style={{marginBottom: '15px', display: 'block'}}>MMR range</label>
-        <Slider range defaultValue={[minMark, maxMark]} min={0} max={8000}
-          onChange={this.onSliderChange} marks={marks} handle={<CustomHandle />}/>
+        <label style={{marginBottom: '15px', display: 'block'}}>Select MMR range you are interested for</label>
+        <Slider range defaultValue={[2000, 5000]} min={0} max={10000}
+          onChange={this.props.input.onChange} marks={marks} handle={<CustomHandle />}/>
       </div>
     )
   }

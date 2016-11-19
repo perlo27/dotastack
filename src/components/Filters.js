@@ -1,24 +1,32 @@
 import React from 'react'
 import { Component, PropTypes } from 'react'
 import Slider from './Slider'
+import FiltersForm from './FiltersForm'
 import { connect } from 'react-redux'
-import { changeMmrFilter } from '../AC/filters'
+
+
+const initialValues = {
+  carry: true,
+  mid: true,
+  supp: true,
+  off: true,
+  rait: "all",
+  mmrRange: [2000, 5000]
+}
 
 class Filters extends Component {
 
   render() {
-    const { mmrRange, changeMmrFilter, userMMR } = this.props
-    console.log(mmrRange[0])
+    const { userMMR } = this.props
 
     return (
       <div style={{ width: '300px', marginLeft: '20px' }}>
-        <Slider changeMmrFilter = { changeMmrFilter } userMMR = { userMMR }/>
+        <FiltersForm initialValues={initialValues}/>
       </div>
     )
   }
 }
 
 export default connect(state => ({
-  mmrRange: state.filters.get('mmr'),
   userMMR: state.user.mmr
-}), { changeMmrFilter })(Filters)
+}))(Filters)
