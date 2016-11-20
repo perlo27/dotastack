@@ -28,6 +28,7 @@ export const parties  = [
           averagemmr: 2200,
           leader: "12l2n3a124e324",
           neededroles: ["supp"],
+          gametype: "raiting",
           waitlist: [
             {nick: "lopop",
              mmr: 1332,
@@ -70,6 +71,7 @@ export const parties  = [
           averagemmr: 3200,
           leader: "12o45uvno5itvn124",
           neededroles: ["off", "carry"],
+          gametype: "raiting",
           waitlist: [
             {nick: "lohhyypop",
              mmr: 2332,
@@ -102,6 +104,7 @@ export const parties  = [
           averagemmr: 9250,
           leader: "12osdftvn124",
           neededroles: ["off", "carry", "supp"],
+          gametype: "raiting",
           waitlist: []
         },
         {
@@ -123,6 +126,7 @@ export const parties  = [
           averagemmr: 4100,
           leader: "12osdft98ujonl",
           neededroles: ["mid"],
+          gametype: "noraiting",
           waitlist: []
         }
 ]

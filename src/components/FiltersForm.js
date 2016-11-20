@@ -9,6 +9,7 @@ class FiltersForm extends Component {
     return(
       <form style={{marginTop: '20px'}}>
         <div>
+          <p>Choose roles your play</p>
           <label htmlFor="carry">Carry</label>
           <Field name="carry" id="carry" component="input" type="checkbox" />
           <label htmlFor="mid">Mid</label>

@@ -12,7 +12,8 @@ const PartyModel = Record({
     averagemmr: null,
     players: new Map({}),
     waitlist: new Map({}),
-    neededroles: []
+    neededroles: [],
+    gametype: ""
 })
 
 const PlayerModel = Record({
@@ -49,9 +50,8 @@ export default (parties = dswupd, action) => {
       )
 
     case JOIN_TO_PARTY:
-
       return parties.setIn([payload.partyId, 'players', payload.user.id], new PlayerModel(payload.user) )
-                    .setIn( [payload.partyId, 'averagemmr'], updateMMR(parties.getIn([payload.partyId, 'players']), payload.user.mmr))
+                    .setIn([payload.partyId, 'averagemmr'], updateMMR(parties.getIn([payload.partyId, 'players']), payload.user.mmr))
 
     case LEAVE_PARTY:
       return parties.deleteIn([payload.partyId, 'players', payload.user.id])

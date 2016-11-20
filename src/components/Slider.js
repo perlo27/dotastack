@@ -34,7 +34,7 @@ class SliderComponent extends Component {
       0: 0,
       10000: 10000
     }
-    console.log(marks)
+
     return (
       <div>
         <label style={{marginBottom: '15px', display: 'block'}}>Select MMR range you are interested for</label>

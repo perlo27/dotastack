@@ -25,14 +25,28 @@ export default connect(state => {
   const selectedRoles = [formvalues.carry && "carry", formvalues.mid && "mid", formvalues.supp && "supp", formvalues.off && "off"]
 
   const filteredParties = state.parties.filter( v => {
+    
     const mmrfilter = v.get('averagemmr') >= mmrRange[0] && v.get('averagemmr') <= mmrRange[1]
     const roles = v.get('neededroles').filter(v => selectedRoles.indexOf(v) != -1)
-    console.log(roles)
-    return  !!roles.length && mmrfilter
-  }
+    let partygametype
 
-  )
-  console.log('---FILTERED PARTIES---',filteredParties)
+    switch ( formvalues.rait ) {
+      case 'all':
+        partygametype = true
+      break
+
+      case 'noraiting':
+        partygametype = v.get('gametype') == 'noraiting'
+      break
+
+      case 'raiting':
+        partygametype = v.get('gametype') == 'raiting'
+      break
+    }
+
+    return  !!roles.length && mmrfilter && partygametype
+  })
+
   return {
     parties: filteredParties.valueSeq().toArray()
   }
