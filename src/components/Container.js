@@ -28,9 +28,6 @@ class Container extends Component {
             <li><Link to="/createparty">Create party</Link></li>
             <li><Link to="/parties/1234412">Party 1 page</Link></li>
           </ul>
-          <h3>some filters</h3>
-          <Filters/>
-
           {this.props.children}
         </div>
 

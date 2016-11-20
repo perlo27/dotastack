@@ -2,7 +2,7 @@ import React from 'react'
 import { Component, PropTypes } from 'react'
 import PartyLink from './PartyLink'
 import { connect } from 'react-redux'
-
+import Filters from './Filters'
 
 class PartyList extends Component {
 
@@ -25,7 +25,7 @@ export default connect(state => {
   const selectedRoles = [formvalues.carry && "carry", formvalues.mid && "mid", formvalues.supp && "supp", formvalues.off && "off"]
 
   const filteredParties = state.parties.filter( v => {
-    
+
     const mmrfilter = v.get('averagemmr') >= mmrRange[0] && v.get('averagemmr') <= mmrRange[1]
     const roles = v.get('neededroles').filter(v => selectedRoles.indexOf(v) != -1)
     let partygametype

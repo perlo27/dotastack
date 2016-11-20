@@ -21,6 +21,7 @@ class Filters extends Component {
 
     return (
       <div style={{ width: '300px', marginLeft: '20px' }}>
+        <h3> Filters </h3>
         <FiltersForm initialValues={initialValues}/>
       </div>
     )
