@@ -15,15 +15,22 @@ class PartyPage extends Component {
   }
   render() {
     const {party, user} = this.props
-    const players = party.get('players').toArray().map( player => <li key={player.id}>{player.nick}, mmr:{player.mmr}</li>)
+    const players = party.get('players').toArray().map( player =>
+      <li key={player.id}>{player.nick}, mmr:{player.mmr}</li>
+    )
+    const WaitListShower = party.get('players').size < 5 ?
+      <div>
+        <h2>WAITLIST</h2>
+        <WaitList party={party} user={user}/>
+      </div>
+       : null
 
     return (
       <div>
         <Link to ="partylist" onClick={this.handleLeave}>Leave party</Link>
         <h2>{party.get('partyname')}, mmr: {party.get('averagemmr')} </h2>
         <ul>{players}</ul>
-        <h2>WAITLIST</h2>
-        <WaitList party={party} user={user}/>
+        {WaitListShower}
       </div>
     )
   }

@@ -30,10 +30,11 @@ class Authtorization extends Component {
   handleSignIn = (ev) => {
     const {signIn} = this.props
     signIn({
-      nick: 'petru4o',
-      mmr: 1777,
-      role: 'carry',
-      id: '1sdfsfk5m56l'
+      nick: "vasa",
+      mmr: 1233,
+      role: "mid",
+      id: "12l2n3a124e324",
+      waitlist: []
     })
   }
 }

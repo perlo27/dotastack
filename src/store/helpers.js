@@ -22,3 +22,13 @@ export function checkParty() {
   if (!JSON.parse(localStorage.getItem('user'))) return false
   return JSON.parse(localStorage.getItem('user')).inparty ? JSON.parse(localStorage.getItem('user')).inparty : false
 }
+
+export function updateStorage(storageKey, objectKey, value, method) {
+  if ( !JSON.parse(localStorage.getItem(storageKey)) ) return false
+  var playerObj = JSON.parse(localStorage.getItem(storageKey))
+  if (method == 'push') {
+    playerObj[objectKey].push(value)
+  }
+  localStorage.removeItem(storageKey)
+  localStorage.setItem(storageKey, JSON.stringify(playerObj))
+}

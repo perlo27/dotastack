@@ -1,8 +1,9 @@
 import React from 'react'
 import { Component, PropTypes } from 'react'
 import { connect } from 'react-redux'
-import { joinToParty } from '../AC/party'
+import { joinToPartyRequest } from '../AC/party'
 import { Link } from 'react-router'
+import { updateStorage } from '../store/helpers'
 
 class PartyLink extends Component {
 
@@ -12,10 +13,20 @@ class PartyLink extends Component {
 
   render() {
 
-    const {party} = this.props
+    const { party } = this.props
+    let highLighter = null
+    let button = <button onClick={this.handleJoin}>Join Party</button>
+    if ( localStorage.getItem('user') ) {
+      const WL = JSON.parse(localStorage.getItem('user')).waitlist
+      if (WL.indexOf(party.get('id')) != -1 ){
+        highLighter = {color: "green"}
+        button = null
+      }
+    }
+
     const body = (
       <div>
-        <h4> {party.get('partyname')}  <span>MMR: {party.get('averagemmr')}</span></h4>
+        <h4 style={highLighter}> {party.get('partyname')}  <span>MMR: {party.get('averagemmr')}</span></h4>
         <h5> {party.get('description')} </h5>
         <ul> {party.get('players').toArray().map(player=>(
             <li key={player.id}><span>{player.nick}, mmr:{player.mmr}</span> {player.role}</li>))}
@@ -25,18 +36,21 @@ class PartyLink extends Component {
     return (
       <div>
         {body}
-        <Link to={`/parties/${party.get('id')}`} onClick={this.handleJoin}>Join Party</Link>
+        {button}
       </div>
     )
   }
 
   handleJoin = (ev) => {
-    const {joinToParty, user, party} = this.props
-    if (user.nick) joinToParty(user, party.get('id'))
+    const {joinToPartyRequest, user, party} = this.props
+    if (user.nick) {
+      joinToPartyRequest(user, party.get('id'))
+      updateStorage('user', 'waitlist', party.get('id'), 'push')
+    }
   }
 
 }
 
 export default connect(state => ({
   user: state.user
-}), { joinToParty })(PartyLink)
+}), { joinToPartyRequest })(PartyLink)

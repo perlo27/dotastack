@@ -1,4 +1,4 @@
-import { CREATE_PARTY, LEAVE_PARTY, JOIN_TO_PARTY, DELETE_PARTY } from '../constants'
+import { CREATE_PARTY, LEAVE_PARTY, JOIN_TO_PARTY, DELETE_PARTY, JOIN_TO_PARTY_REQUEST } from '../constants'
 import history from '../history'
 
 export function createPatry(partyprops, user) {
@@ -39,6 +39,15 @@ export function deleteParty(partyId) {
     type: DELETE_PARTY,
     payload: {
       partyId
+    }
+  }
+}
+
+export function joinToPartyRequest(user, partyId) {
+  return {
+    type: JOIN_TO_PARTY_REQUEST,
+    payload: {
+      user, partyId
     }
   }
 }
