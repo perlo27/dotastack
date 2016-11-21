@@ -18,9 +18,10 @@ const PartyModel = Record({
 
 const PlayerModel = Record({
   nick: "",
-   mmr: null,
-   role: "",
-   id: ""
+  mmr: null,
+  role: "",
+  id: "",
+  inparty: ""
 })
 
 
@@ -28,7 +29,7 @@ const PlayerModel = Record({
 const defState = arrayToMap(defParties, party => new PartyModel(party))
 const defStateP = defState.map((v,k) => v.update('players', players => arrayToMap(players, player => new PlayerModel(player))))
 const dswupd = defStateP.map( v => v.update('waitlist', waitlist => arrayToMap(waitlist, wlp => new PlayerModel(wlp))))
-window.defState = dswupd
+
 
 
 export default (parties = dswupd, action) => {

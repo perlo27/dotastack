@@ -2,7 +2,7 @@ import { Map } from 'immutable'
 import store from './index'
 
 export function checkAuth() {
-  return store.getState().user.nick ? true : false
+  return !!JSON.parse(localStorage.getItem('user'))
 }
 
 export function arrayToMap(arr, mapper = (f) => f) {
@@ -16,4 +16,9 @@ export function updateMMR(playersMap, pmmr) {
   const total = Math.floor((summMMR + pmmr) / playersCount)
 
   return total
+}
+
+export function checkParty() {
+  if (!JSON.parse(localStorage.getItem('user'))) return false
+  return JSON.parse(localStorage.getItem('user')).inparty ? JSON.parse(localStorage.getItem('user')).inparty : false
 }
