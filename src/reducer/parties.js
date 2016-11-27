@@ -53,18 +53,18 @@ export default (parties = dswupd, action) => {
       return parties.setIn([payload.partyId, 'waitlist', payload.user.id], new PlayerModel(payload.user))
 
     case JOIN_TO_PARTY:
-      return parties.setIn([payload.partyId, 'players', payload.user.id], new PlayerModel(payload.user) )
+      return parties.setIn([payload.partyId, 'players', payload.user.id], new PlayerModel(payload.user))
                     .setIn([payload.partyId, 'averagemmr'], updateMMR(parties.getIn([payload.partyId, 'players']), payload.user.mmr))
 
     case LEAVE_PARTY:
       return parties.deleteIn([payload.partyId, 'players', payload.user.id])
-
+                    .setIn([payload.partyId, 'averagemmr'], updateMMR(parties.getIn([payload.partyId, 'players']), payload.user.mmr, "minus"))
     case DELETE_PARTY:
       return parties.delete(payload.partyId)
 
     case INVITE_FROM_WL:
-      return parties.setIn([payload.partyId, 'players', payload.player.id], new PlayerModel(payload.player) )
-                  .setIn([payload.partyId, 'averagemmr'], updateMMR(parties.getIn([payload.partyId, 'players']), payload.player.mmr))
+      return parties.setIn([payload.partyId, 'players', payload.player.id], new PlayerModel(payload.player))
+                  .setIn([payload.partyId, 'averagemmr'], updateMMR(parties.getIn([payload.partyId, 'players']), payload.player.mmr, "plus"))
                   .deleteIn([payload.partyId, 'waitlist', payload.player.id])
 
     case KICK_FROM_WL:

@@ -1,5 +1,4 @@
 import { Map } from 'immutable'
-import store from './index'
 
 export function checkAuth() {
   return !!JSON.parse(localStorage.getItem('user'))
@@ -9,13 +8,12 @@ export function arrayToMap(arr, mapper = (f) => f) {
     return arr.reduce((acc, entity) => acc.set(entity.id, mapper(entity)), new Map({}))
 }
 
-export function updateMMR(playersMap, pmmr) {
+export function updateMMR(playersMap, pmmr, action) {
   const mmrarr = playersMap.map(v => v.get('mmr')).toArray()
-  const playersCount = mmrarr.length + 1
-  const summMMR = mmrarr.reduce( (acc, v )=> acc + v, 0 )
-  const total = Math.floor((summMMR + pmmr) / playersCount)
+  const playersCount = action == "plus" ? mmrarr.length + 1 : mmrarr.length - 1
+  const summMMR = mmrarr.reduce( (acc, v) => acc + v, 0 )
 
-  return total
+  return  Math.floor((action == "plus" ? summMMR + pmmr : summMMR - pmmr) / playersCount)
 }
 
 export function checkParty() {
@@ -25,7 +23,7 @@ export function checkParty() {
 
 export function updateStorage(storageKey, objectKey, value, method) {
   if ( !JSON.parse(localStorage.getItem(storageKey)) ) return false
-  var playerObj = JSON.parse(localStorage.getItem(storageKey))
+  let playerObj = JSON.parse(localStorage.getItem(storageKey))
   if (method == 'push') {
     playerObj[objectKey].push(value)
   }

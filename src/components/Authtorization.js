@@ -2,7 +2,7 @@ import React from 'react'
 import { Component, PropTypes } from 'react'
 import { signIn, signOut } from '../AC/auth'
 import { connect } from 'react-redux'
-import { leaveParty, deleteParty } from '../AC/party'
+import { leaveParty } from '../AC/party'
 
 class Authtorization extends Component {
 
@@ -19,21 +19,21 @@ class Authtorization extends Component {
     <button onClick={ this.handleSignOut }>Sign Out</button></div> : <button onClick={ this.handleSignIn }>Sign In</button>
   }
 
-  handleSignOut = ev => {
+  handleSignOut = () => {
     const {user, signOut, parties, leaveParty} = this.props
-    const pertyWithUser = parties.findKey(v => v.get('players').has(user.id))
+    const partyWithUser = parties.findKey(v => v.get('players').has(user.id))
 
-    if ( pertyWithUser ) leaveParty(user, pertyWithUser)
+    if ( partyWithUser ) leaveParty(user, partyWithUser)
     signOut()
   }
 
-  handleSignIn = (ev) => {
+  handleSignIn = () => {
     const {signIn} = this.props
     signIn({
-      nick: "vasa",
-      mmr: 1233,
+      nick: "petuna",
+      mmr: 2223,
       role: "mid",
-      id: "12l2n3a124e324",
+      id: "sfffffff",
       waitlist: []
     })
   }
