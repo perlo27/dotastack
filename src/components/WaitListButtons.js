@@ -16,9 +16,15 @@ class WaitListButtons extends Component {
     kickFromWL(player, party.get('id'))
   }
   render() {
-
-    const { leader } = this.props
-    const body = leader ? <div><button onClick={this.handleInvite}>Invite</button><button onClick={this.handleKick}>Decline</button></div> : null
+    const { leader, roles } = this.props
+      console.log('player from WLBTNS ---- ', roles)
+    const inviteButtons = 1
+    const body = leader ?
+        <div>
+          <button onClick={this.handleInvite}>Invite</button>
+          <button onClick={this.handleKick}>Decline</button>
+        </div>
+        : null
 
 
     return (
@@ -29,4 +35,11 @@ class WaitListButtons extends Component {
   }
 }
 
-export default connect(null, { kickFromWL, inviteFromWL, clearWL} )(WaitListButtons)
+export default connect(state => (
+    {
+        roles: state.user.role
+    }
+), { kickFromWL, inviteFromWL, clearWL} )(WaitListButtons)
+
+
+

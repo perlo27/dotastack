@@ -1,0 +1,40 @@
+.filters-form {
+  display: flex;
+  flex-flow: row nowrap;
+  align-items: baseline;
+  justify-content: space-around;
+  margin-bottom: 25px;
+  padding-top: 10px;
+}
+.filters-role {
+  display: flex;
+  flex-flow: column nowrap;
+  align-items: center;
+  justify-content: space-around;
+  flex: 1;
+
+}
+.filters-role-options {
+  display: flex;
+  flex-flow: row nowrap;
+  &>div:last-child {
+    margin-left: 5px;
+  }
+}
+
+.filters-rait {
+  flex: 1;
+  label {
+    display: block;
+    padding-bottom: 5px;
+  }
+}
+
+.filters-role-label {
+  padding-bottom: 5px;
+}
+
+.filters-range {
+  flex: 2;
+  padding-right: 25px;
+}

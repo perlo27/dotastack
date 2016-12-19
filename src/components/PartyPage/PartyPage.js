@@ -2,8 +2,8 @@ import React from 'react'
 import { Component, PropTypes } from 'react'
 import { connect } from 'react-redux'
 import { Link } from 'react-router'
-import WaitList from './WaitList'
-import { leaveParty, deleteParty } from '../AC/party'
+import WaitList from '../WaitList'
+import { leaveParty, deleteParty } from '../../AC/party'
 
 class PartyPage extends Component {
   handleLeave = ev => {

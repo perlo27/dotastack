@@ -1,8 +1,9 @@
 import React from 'react'
 import { Component, PropTypes } from 'react'
-import { signIn, signOut } from '../AC/auth'
+import { signIn, signOut } from '../../AC/auth'
 import { connect } from 'react-redux'
-import { leaveParty } from '../AC/party'
+import { leaveParty } from '../../AC/party'
+import './authtorization.scss'
 
 class Authtorization extends Component {
 
@@ -16,7 +17,7 @@ class Authtorization extends Component {
     const { user } = this.props
 
     return user.nick ? <div><h4>{ user.nick } <span>MMR: { user.mmr }</span></h4>
-    <button onClick={ this.handleSignOut }>Sign Out</button></div> : <button onClick={ this.handleSignIn }>Sign In</button>
+    <button onClick={ this.handleSignOut }>Sign Out</button></div> : <a href="#" onClick={ this.handleSignIn } className="btn-auth">Sign In</a>
   }
 
   handleSignOut = () => {

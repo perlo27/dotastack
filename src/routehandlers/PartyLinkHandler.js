@@ -1,5 +1,5 @@
 import React, { Component, PropTypes } from 'react'
-import PartyPage from '../components/PartyPage'
+import PartyPage from '../components/PartyPage/PartyPage'
 
 class PartyLinkHandler extends Component {
     static propTypes = {

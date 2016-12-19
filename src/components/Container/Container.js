@@ -1,14 +1,11 @@
 import React from 'react'
 import {Component, PropTypes} from 'react'
-import PartyList from './PartyList'
-import PartyPage from './PartyPage'
-import PartyCreate from './PartyCreate'
 import { connect } from 'react-redux'
-import Authtorization from './Authtorization'
+import Authtorization from '../Authtorization/Authtorization'
 import { Provider } from 'react-redux'
-import store from '../store'
+import store from '../../store'
 import { Link } from 'react-router'
-import Filters from './Filters'
+import './container.scss'
 
 class Container extends Component {
 
@@ -21,7 +18,7 @@ class Container extends Component {
 
     return (
       <Provider store={store}>
-        <div>
+        <div className="cont">
           <Authtorization/>
           <ul>
             <li><Link to="/partylist">Party list</Link></li>

@@ -1,8 +1,9 @@
 import React from 'react'
 import { Component, PropTypes } from 'react'
-import Slider from './Slider'
-import FiltersForm from './FiltersForm'
+import Slider from '../Slider'
+import FiltersForm from '../FiltersForm/FiltersForm'
 import { connect } from 'react-redux'
+import './filters.scss'
 
 
 const initialValues = {
@@ -20,8 +21,7 @@ class Filters extends Component {
     const { userMMR } = this.props
 
     return (
-      <div style={{ width: '300px', marginLeft: '20px' }}>
-        <h3> Filters </h3>
+      <div className="filters">
         <FiltersForm initialValues={initialValues}/>
       </div>
     )

@@ -3,6 +3,14 @@ import { CREATE_PARTY, JOIN_TO_PARTY, LEAVE_PARTY, DELETE_PARTY, JOIN_TO_PARTY_R
 import { Record, Map, List } from 'immutable'
 import { arrayToMap, updateMMR } from '../store/helpers'
 
+const RoleModel = Record({
+    mid: null,
+    carry: null,
+    off: null,
+    supp4: null,
+    supp5: null
+})
+
 const PartyModel = Record({
     id: null,
     date: null,
@@ -13,7 +21,8 @@ const PartyModel = Record({
     players: new Map({}),
     waitlist: new Map({}),
     neededroles: [],
-    gametype: ""
+    gametype: "",
+    roles: new RoleModel()
 })
 
 const PlayerModel = Record({
@@ -38,40 +47,43 @@ export default (parties = dswupd, action) => {
   switch (type) {
 
     case CREATE_PARTY:
-      return parties.set(generatedId, new PartyModel({
-          id: generatedId,
-          date: Date.now(),
-          partyname: payload.partyprops.partyname,
-          description: payload.partyprops.description,
-          leader: payload.user.id,
-          averagemmr: payload.user.mmr,
-          players: new Map({}).set(payload.user.id, new PlayerModel(payload.user)),
-          waitlist: new Map({})
+        return parties.set(generatedId, new PartyModel({
+            id: generatedId,
+            date: Date.now(),
+            partyname: payload.partyprops.partyname,
+            description: payload.partyprops.description,
+            leader: payload.user.id,
+            averagemmr: payload.user.mmr,
+            players: new Map({}).set(payload.user.id, new PlayerModel(payload.user)),
+            waitlist: new Map({})
         })
-      )
+        )
+
     case JOIN_TO_PARTY_REQUEST:
-      return parties.setIn([payload.partyId, 'waitlist', payload.user.id], new PlayerModel(payload.user))
+        return parties.setIn([payload.partyId, 'waitlist', payload.user.id], new PlayerModel(payload.user))
 
     case JOIN_TO_PARTY:
-      return parties.setIn([payload.partyId, 'players', payload.user.id], new PlayerModel(payload.user))
+        return parties.setIn([payload.partyId, 'players', payload.user.id], new PlayerModel(payload.user))
                     .setIn([payload.partyId, 'averagemmr'], updateMMR(parties.getIn([payload.partyId, 'players']), payload.user.mmr))
 
     case LEAVE_PARTY:
-      return parties.deleteIn([payload.partyId, 'players', payload.user.id])
-                    .setIn([payload.partyId, 'averagemmr'], updateMMR(parties.getIn([payload.partyId, 'players']), payload.user.mmr, "minus"))
+        return parties.deleteIn([payload.partyId, 'players', payload.user.id])
+          .setIn([payload.partyId, 'averagemmr'], updateMMR(parties.getIn([payload.partyId, 'players']), payload.user.mmr, "minus"))
+
     case DELETE_PARTY:
-      return parties.delete(payload.partyId)
+        return parties.delete(payload.partyId)
 
     case INVITE_FROM_WL:
-      return parties.setIn([payload.partyId, 'players', payload.player.id], new PlayerModel(payload.player))
-                  .setIn([payload.partyId, 'averagemmr'], updateMMR(parties.getIn([payload.partyId, 'players']), payload.player.mmr, "plus"))
-                  .deleteIn([payload.partyId, 'waitlist', payload.player.id])
+        return parties.setIn([payload.partyId, 'players', payload.player.id], new PlayerModel(payload.player))
+            .setIn([payload.partyId, 'averagemmr'], updateMMR(parties.getIn([payload.partyId, 'players']), payload.player.mmr, "plus"))
+            .deleteIn([payload.partyId, 'waitlist', payload.player.id])
+
 
     case KICK_FROM_WL:
-      return parties.deleteIn([payload.partyId, 'waitlist', payload.player.id])
+        return parties.deleteIn([payload.partyId, 'waitlist', payload.player.id])
 
     case CLEAR_WL:
-      return parties.setIn([payload.partyId, 'waitlist'], new Map({}))
+        return parties.setIn([payload.partyId, 'waitlist'], new Map({}))
   }
 
   return parties

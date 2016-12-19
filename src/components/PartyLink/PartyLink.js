@@ -1,9 +1,10 @@
 import React from 'react'
 import { Component, PropTypes } from 'react'
 import { connect } from 'react-redux'
-import { joinToPartyRequest } from '../AC/party'
+import { joinToPartyRequest } from '../../AC/party'
 import { Link } from 'react-router'
-import { updateStorage } from '../store/helpers'
+import { updateStorage } from '../../store/helpers'
+import './partylink.scss'
 
 class PartyLink extends Component {
 
@@ -15,7 +16,7 @@ class PartyLink extends Component {
 
     const { party } = this.props
     let highLighter = null
-    let button = <button onClick={this.handleJoin}>Join Party</button>
+    let button = <div className="joinbutton"><button onClick={this.handleJoin}>Join Party</button></div>
     if ( localStorage.getItem('user') ) {
       const WL = JSON.parse(localStorage.getItem('user')).waitlist
       if (WL.indexOf(party.get('id')) != -1 ){
@@ -25,20 +26,20 @@ class PartyLink extends Component {
     }
 
     const body = (
-      <div>
-        <h4 style={highLighter}> {party.get('partyname')}  <span>MMR: {party.get('averagemmr')}</span></h4>
-        <h5> {party.get('description')} </h5>
-        <ul> {party.get('players').toArray().map(player=>(
-            <li key={player.id}><span>{player.nick}, mmr:{player.mmr}</span> {player.role}</li>))}
-        </ul>
+      <div className="partylink">
+          <div className="partyname">
+              <h4 style={highLighter}> {party.get('partyname')}  <span>MMR: {party.get('averagemmr')}</span></h4>
+          </div>
+          {/*<h5> {party.get('description')} </h5>*/}
+          <div className="partyentries">
+              <ul>{party.get('players').toArray().map(player=>(
+                  <li key={player.id} title={`${player.nick}, mmr:${player.mmr}`}>{player.role}</li>))}
+              </ul>
+          </div>
+          {button}
       </div>)
 
-    return (
-      <div>
-        {body}
-        {button}
-      </div>
-    )
+    return body
   }
 
   handleJoin = (ev) => {

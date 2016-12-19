@@ -1,8 +1,8 @@
 import React from 'react'
 import { Component, PropTypes } from 'react'
-import PartyLink from './PartyLink'
+import PartyLink from '../PartyLink/PartyLink'
 import { connect } from 'react-redux'
-import Filters from './Filters'
+import './partylist.scss'
 
 class PartyList extends Component {
 
@@ -12,7 +12,7 @@ class PartyList extends Component {
     const body = parties.map(party => <PartyLink party={party} key={party.id}/>)
 
     return (
-      <div>
+      <div className="partylist">
         {body}
       </div>
     )
